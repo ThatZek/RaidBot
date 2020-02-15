@@ -5,9 +5,9 @@ module.exports.run = async(client, msg, args) => {
     const users = client.db.get('users');
     const affectedRows = await users.update({ permissionRank: rank}, { where: { discordID: discordUser.id } });
     if (affectedRows > 0) {
-	    return message.reply(`User ${member.nickname} was edited.`);
+	    return msg.reply(`User ${member.nickname} was edited.`);
     }
-    return message.reply(`Could not find a user with id ${discordUser.id}.`);
+    return msg.reply(`Could not find a user with id ${discordUser.id}.`);
 }
 
 module.exports.properties = {
