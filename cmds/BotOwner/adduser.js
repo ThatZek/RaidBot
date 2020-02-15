@@ -24,7 +24,7 @@ module.exports.run = async(client, msg, args) => {
 
 module.exports.properties = {
     name: "adduser",
-    enabled: false,
+    enabled: true,
     permissionRank: 0,
     commandLevel: "bot",
     botPermissions: [
