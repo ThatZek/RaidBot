@@ -62,7 +62,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 	if(msg.author.bot) return;
-	const prefix = config.prefix;
+	const prefix = config.factoryPrefix;
     const args = msg.content.slice(prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
     if (msg.content.startsWith(config.prefix)) {
