@@ -7,7 +7,6 @@ module.exports.run = async(client, msg, args) => {
     const discordUser = member.user;
     const username = args[1].toLowerCase();
     const users = client.db.get('users');
-    console.log(username);
     try {
         const user = await users.create({
             discordID: discordUser.id,

@@ -1,13 +1,14 @@
 const Discord = require("discord.js");
 const fs = require('fs');
 const Sequelize = require('sequelize');
-const config = require('./config.json')
+const config = require('./config.json');
 const client = new Discord.Client();
 
 //Collection defining
 client.db = new Discord.Collection();
 client.database = require('./database/database.js');
 client.commands = new Discord.Collection();
+client.servers = new Discord.Collection();
 
 //commands
 fs.readdir("./cmds/", (err, folders) => {
@@ -54,6 +55,28 @@ fs.readdir("./database/", (err, folders) => {
 	}
 })
 
+//servers
+fs.readdir("./servers/", (err, folders) => {
+	if (err) throw err;
+	for (let i = 0; i < folders.length; i++) {
+		fs.readdir(`./servers/${folders[i]}`, (e, files) => {
+			if(files === undefined) return;
+			let jsfiles = files.filter(f => f.split(".").pop() === 'js');
+			if (jsfiles.length < 1) {
+				console.log(`No server in ${folders[i]}`);
+				return;
+			}
+
+			jsfiles.forEach((file) => {
+				let server = require(`./servers/${folders[i]}/${file}`);
+				if(!server.properties.enabled) return;
+				console.log(`Loaded ${file}`);
+				client.servers.set(server.properties.name, server);
+			})
+		})
+	}
+})
+
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
     client.user.setActivity('Ping bot for help', {type: "PLAYING"});
@@ -63,11 +86,30 @@ client.on('ready', () => {
 client.on('message', msg => {
 	if(msg.author.bot) return;
 	const prefix = config.factoryPrefix;
-    const args = msg.content.slice(prefix.length).split(/ +/);
+	const args = msg.content.slice(prefix.length).split(/ +/);
+	const member = msg.member;
+	const user = member.user;
 	const command = args.shift().toLowerCase();
     if (msg.content.startsWith(prefix)) {
-    const cmd = client.commands.get(command);
+	const cmd = client.commands.get(command);
     if (cmd) {
+		const users = client.db.get('users');
+		const dbUser = await users.findOne({ where: { discordID: user.id } });
+		if (dbUser) {
+			if(dbUser.permissionRank < cmd.properties.permissionRank) return msg.reply('Insufficient permissions!');
+		} else {
+			try {
+				const dbUser = await users.create({
+					discordID: user.id,
+					permissionRank: 0,
+					username: username,
+				});
+				if (0 < cmd.properties.permissionRank) return msg.reply('Insufficient permissions!');
+			}
+			catch (e) {
+				return msg.reply('Something went wrong with adding a user.');
+			}
+		}
             return cmd.run(client, msg, args);
         }
     }
