@@ -4,13 +4,13 @@ const Sequelize = require('sequelize');
 
 module.exports.run = async(client, msg, args) => {
     const member = msg.mentions.members.first();
-    const user = member.user;
+    const discordUser = member.user;
     const username = args[1].toLowerCase();
     const users = client.db.get('users');
     console.log(username);
     try {
         const user = await users.create({
-            discordID: user.id,
+            discordID: discordUser.id,
             permissionRank: 0,
             username: username,
         });
