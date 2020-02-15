@@ -3,9 +3,17 @@ const fs = require('fs');
 const Sequelize = require('sequelize');
 const database = require('../database.js')
 
-module.exports = database.define('')
+module.exports = database.define('users', {
+    disordID: {
+        type: Sequelize.STRING,
+        unique: true,
+        primaryKey: true,
+    },
+    username: Sequelize.STRING,
+    permissionRank: Sequelize.INTEGER,
+})
 
 module.exports.properties = {
-    name = "users",
-    enabled = "true",
+    name: "users",
+    enabled: true
 }

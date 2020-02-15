@@ -6,6 +6,6 @@ const database = require('../database.js')
 module.exports = database.define('')
 
 module.exports.properties = {
-    name = "servers",
-    enabled = "true",
+    name: "servers",
+    enabled: false
 }

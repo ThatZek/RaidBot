@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fs = require('fs');
 const Sequelize = require('sequelize');
 
-modules.export = new Sequelize({
+module.exports = new Sequelize({
     dialect: 'sqlite',
     logging: false,
     storage: 'database.sqlite',
