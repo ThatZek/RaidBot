@@ -48,7 +48,7 @@ fs.readdir("./database/", (err, folders) => {
 				if(!model.properties.enabled) return;
 				console.log(`Loaded ${file}`);
 				client.db.set(model.properties.name, model);
-				client.database.sync();
+				model.sync();
 			})
 		})
 	}
