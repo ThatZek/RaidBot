@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 module.exports.run = async (client, msg, args) => {
     console.log(args);
-    const toSync = args[0];
-    client.db.toSync.sync({force: true});
+    const toSync = client.db.get(args[0]);
+    toSync.sync({force: true});
     msg.reply(`Force Synced ${args[0]}`);
 }
 module.exports.properties = {
