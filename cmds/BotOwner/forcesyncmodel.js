@@ -5,7 +5,7 @@ module.exports.run = async (client, msg, args) => {
     msg.reply(`Force Synced ${args[0]}`);
 }
 module.exports.properties = {
-    name: "ping",
+    name: "forcesync",
     enabled: true,
     permissionRank: 100,
     commandLevel: "bot",
