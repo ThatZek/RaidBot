@@ -65,7 +65,7 @@ client.on('message', msg => {
 	const prefix = config.factoryPrefix;
     const args = msg.content.slice(prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
-    if (msg.content.startsWith(config.prefix)) {
+    if (msg.content.startsWith(prefix)) {
     const cmd = client.commands.get(command);
     if (cmd) {
             return cmd.run(client, msg, args);
