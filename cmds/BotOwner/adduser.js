@@ -6,6 +6,7 @@ module.exports.run = async(client, msg, args) => {
     const member = msg.mentions.members.first();
     const user = member.user;
     const username = args[1].toLowerCase();
+    console.log(username);
     try {
         const user = await client.db.users.create({
             discordID: user.id,
@@ -25,7 +26,7 @@ module.exports.run = async(client, msg, args) => {
 module.exports.properties = {
     name: "adduser",
     enabled: true,
-    permissionRank: 0,
+    permissionRank: 100,
     commandLevel: "bot",
     botPermissions: [
 

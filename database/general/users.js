@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const database = require('../database.js')
 
 module.exports = database.define('users', {
-    disordID: {
+    discordID: {
         type: Sequelize.STRING,
         unique: true,
         primaryKey: true,
