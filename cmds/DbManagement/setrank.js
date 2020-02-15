@@ -12,7 +12,7 @@ module.exports.run = async(client, msg, args) => {
 
 module.exports.properties = {
     name: "setrank",
-    enabled: false,
+    enabled: true,
     permissionRank: 0,
     commandLevel: "bot",
     botPermissions: [
