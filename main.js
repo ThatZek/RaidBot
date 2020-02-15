@@ -57,7 +57,7 @@ fs.readdir("./database/", (err, folders) => {
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
     client.user.setActivity('Ping bot for help', {type: "PLAYING"});
-	client.db.sync();
+	client.database.sync();
 })
 
 client.on('message', msg => {
