@@ -1,7 +1,7 @@
 module.exports.run = async(client, msg, args) => {
     const member = msg.mentions.members.first();
     const discordUser = member.user;
-    const rank = args[1].parseInt();
+    const rank = parseInt(args[1]);
     const users = client.db.get('users');
     const affectedRows = await users.update({ permissionRank: rank}, { where: { discordID: discordUser.id } });
     if (affectedRows > 0) {
