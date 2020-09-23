@@ -1,0 +1,26 @@
+{
+  "name": "raidbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "scripts": {
+    "start": "ts-node -r dotenv/config main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zakhersas/RaidBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zakhersas/RaidBot/issues"
+  },
+  "homepage": "https://github.com/Zakhersas/RaidBot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
+  }
+}
